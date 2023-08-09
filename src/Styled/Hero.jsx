@@ -1,11 +1,11 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components'
 import { Button } from './Button';
 import hero from '../assets/hero1.svg';
 import herone from '../assets/hero5.png';
 
-const Hero = () => {
+const Hero = ({image,headline,bottomLine}) => {
     const Wrapper = styled.section`
    .hero-para{
     color:white;
@@ -28,8 +28,8 @@ const Hero = () => {
         
         top:0px;
         right:0px;
-        background-image: url("https://malgut.pl/wp-content/themes/malgut/img/topmal_01.png"); 
-        background-image: cover;
+        background-image: url(${image}); 
+       
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -97,13 +97,13 @@ const Hero = () => {
         <br />
         <div className="  container grid grid-two-column ">
             <div className="section-hero-data">
-                <p className='hero-top' style={{textShadow:"rgba(13,13,13,0.9) 0px 0px 25px"}}>Upgrade your laundry experince</p>
+                <p className='hero-top' style={{textShadow:"rgba(13,13,13,0.9) 0px 0px 25px"}}>{headline}</p>
                 <h1 className='hero-head'><span style={{color:"#0fa4e1",textShadow:"rgba(13,13,13,0.9) 0px 0px 25px"}}>St<span style={{color:"orange"}}>o</span>ff</span><span style={{color:"green" ,textShadow:"-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"}}>Care</span></h1>
-                <p  className='hero-para' style={{textShadow:"rgba(13,13,13,0.9) 0px 0px 25px"}}>
-                is the highest rated and most searched Laundry and Dry-Cleaning brand</p>
+                <p  className='hero-para' style={{textShadow:"rgba(13,13,13,0.9) 0px 0px 25px"}}>{bottomLine}
+               </p>
             
             
-                <Button className="btn hireme-btn"><NavLink to="/contact" className='btt' style={{color:"Black",fontWeight:700,}}>Order now</NavLink></Button>
+                <Button className="btn hireme-btn"><Link to="/pricing" className='btt' style={{color:"Black",fontWeight:700,}}>Order now</Link></Button>
                 
             </div>
             <div className="section-hero-image">

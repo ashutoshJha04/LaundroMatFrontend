@@ -10,6 +10,9 @@ import Services from './components/Services'
 import Contact from './components/Contact'
 import {ThemeProvider} from 'styled-components'
 import GlobalStyle from './Styled/GlobalStyle';
+import Pricing from './components/Pricing'
+import Login from './components/Login'
+import Register from './components/Register'
 
 function App() {
   const theme = {
@@ -45,12 +48,15 @@ function App() {
     
     
 
-    <Header />
+    
     <Routes>
       <Route path="/" element={<Home/>} />
       <Route path="/about" element={<About />} />
       <Route path="/serv" element={<Services />} />
-      <Route path="/contact" element={<Contact />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      {/* <Route path="/contact" element={<Contact />} /> */}
       <Route path="*" element={<Home/>}  />
     </Routes>
     

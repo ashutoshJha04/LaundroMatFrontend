@@ -8,7 +8,7 @@ import '../App.css';
 
 const Services = () => {
   const Wrapper = styled.section`
-  padding:6rem 0;
+  padding:5rem 0;
   .card{
     border:2px solid ${({theme})=>theme.colors.border};
     border-radius:12px;
@@ -64,7 +64,7 @@ const Services = () => {
   return (
     <Wrapper>
 
-   <center> <h1 style={{marginTop:'9rem',marginBottom:'9rem'}}>Our Services</h1> </center>
+   <center> <h1 style={{marginTop:'4rem',marginBottom:'9rem'}}>Our Services</h1> </center>
 
    
     <div className="container mar grid grid-three-column">
@@ -84,7 +84,7 @@ const Services = () => {
      "Fast, reliable online dry cleaning service for clothing and fabrics, ensuring impeccable cleanliness and convenient doorstep pickup and delivery."
      </div>
    ;
-    <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button>
+    {/* <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button> */}
 
      
      </div> 
@@ -99,7 +99,7 @@ const Services = () => {
      "Fast, reliable online dry cleaning service for clothing and fabrics, ensuring impeccable cleanliness and convenient doorstep pickup and delivery."
      </div>
    ;
-    <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button>
+    {/* <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button> */}
 
      
      </div> 
@@ -114,7 +114,7 @@ const Services = () => {
      "Fast, reliable online dry cleaning service for clothing and fabrics, ensuring impeccable cleanliness and convenient doorstep pickup and delivery."
      </div>
    ;
-    <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button>
+    {/* <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button> */}
 
      
      </div> 
@@ -129,7 +129,7 @@ const Services = () => {
      "Fast, reliable online dry cleaning service for clothing and fabrics, ensuring impeccable cleanliness and convenient doorstep pickup and delivery."
      </div>
    ;
-    <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button>
+    {/* <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button> */}
 
      
      </div> 
@@ -144,7 +144,7 @@ const Services = () => {
      "Fast, reliable online dry cleaning service for clothing and fabrics, ensuring impeccable cleanliness and convenient doorstep pickup and delivery."
      </div>
    ;
-    <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button>
+    {/* <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button> */}
 
      
      </div> 
@@ -159,7 +159,7 @@ const Services = () => {
      "Fast, reliable online dry cleaning service for clothing and fabrics, ensuring impeccable cleanliness and convenient doorstep pickup and delivery."
      </div>
    ;
-    <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button>
+    {/* <Button className="btn sec hireme-btn center m-auto"><NavLink to="/contact" style={{color:"white"}}>Know more</NavLink></Button> */}
 
      
      </div> 

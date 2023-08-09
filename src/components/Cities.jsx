@@ -1,59 +1,99 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import towel1 from "../assets/towels6.png";
+import towel2 from "../assets/towels4.png";
+
 // import { FaInstagram,FaLocationCrosshairs, FaFacebookSquare, FaTelegram} from "react-icons/fa";
 
 function Cities() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-    const itemsList = ['Apple', 'Banana', 'Cherry', 'Grape', 'Orange', 'Pear', 'Strawberry'];
-  
-    const handleSearch = (event) => {
-      const value = event.target.value;
-      setSearchTerm(value);
-  
-      const filteredResults = itemsList.filter(item =>
-        item.toLowerCase().includes(value.toLowerCase())
-      );
-      if(filteredResults.length != 0) {
-        setSearchResults(filteredResults);
-          }
-          else{
-              setSearchResults(["We will be there soon"]);
-          }
-    };
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const itemsList = ['Delhi', 'Faridabad', 'Noida', 'Madhubani', 'Malviya Nagar', 'Okhla', 'Govindpuri'];
+
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+
+    const filteredResults = itemsList.filter(item =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+    if (filteredResults.length != 0) {
+      setSearchResults(filteredResults);
+    }
+    else {
+      setSearchResults(["We will be there soon"]);
+    }
+  };
   return (
     <Wrapper>
-      <center><h1 className='cities-heading'>CITIES WE DELIVER TO</h1></center>
-      {/* <input type="search" name="Search" id="search" /> */}
-      <div className='city-search'>
-        <div className='searchbar'>
-      <input
-        type="text"
-        className='city-input'
-        placeholder="Search for your city..."
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-      </div>
-        
+      <center><h1>CITIES WE DELIVER TO</h1></center>
+      <div className='cities-heading'>
+        <img src={towel2} alt="error" width={"200px"} height={"200px"} />
+        <div className='city-search'>
+          <div className='searchbar'>
+            <input
+              type="text"
+              className='city-input'
+              placeholder="Search for your city..."
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </div>
 
-      <ul className='city-list-box'>
-        {searchResults.map((result, index) => (
-          <li className='city-list' key={index}><span>🏡</span> {result}</li>
-        ))}
-      </ul>
-    </div>
+
+          <ul className='city-list-box'>
+            {searchResults.map((result, index) => (
+              <li className='city-list' key={index}><span>🏡</span> {result}</li>
+            ))}
+          </ul>
+        </div>
+        <img src={towel1} alt="error" width={"200px"} height={"200px"} />
+      </div>
+
     </Wrapper>
   )
 }
 const Wrapper = styled.section`
+padding:9rem;
+position:relative;
+::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index:-1;
+  opacity:0.4;
+  background-image: url("https://malgut.pl/wp-content/themes/malgut/img/malgut-top_02.png");
+background-position: center center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+
+.cities-heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .city-list-box{
-    height:200px;
-    overflow:scroll;
+    height:150px;
+    
     margin-top:10px;
+   
+    border-radius:12px;
+    border:2px solid black; 
+    width:30vw;
+    
+    overflow-x: hidden;
+    overflow-y: auto;
+    
 }
 .city-list-box::-webkit-scrollbar-track{
-    background-color: #f7fcff;
+  
+  display: none;
+   
 }
 .city-list-box::-webkit-scrollbar {
     width: 0; /* Hide the scrollbar */
@@ -67,7 +107,7 @@ const Wrapper = styled.section`
     margin-top:50px;
 }
 .city-input{
-    width:40vw;
+    width:30vw;
     height:40px;
     font-size:3rem;
     border-radius:12px;
@@ -86,9 +126,11 @@ const Wrapper = styled.section`
     font-size:2.5rem;
     font-weight:light;
     letter-spacing:2px;
-    margin-top:5px;
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
     border-bottom:1px solid black;
-    width:40vw;
+    width:30vw;
+    padding:0.5rem;
 }
 
 

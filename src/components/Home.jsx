@@ -1,27 +1,31 @@
 import React from 'react'
 import Hero from '../Styled/Hero'
-import hero from '../assets/hero.svg'
+import hero from '../assets/hero5.png'
 import Footer from '../Styled/Footer'
 import Services from './Services'
 import Contact from './Contact'
 import Min from './Min'
 import styled from 'styled-components'
 import Cities from './Cities'
+import Header from '../Styled/Header'
 
 const Home = () => {
   
   const data = {
-    
-    image : hero
+    headline:"Upgrade your laundry experince",
+    image : "https://malgut.pl/wp-content/themes/malgut/img/topmal_01.png",
+    bottomLine : " is the highest rated and most searched Laundry and Dry-Cleaning brand"
+   
   }
   const Wrapper = styled.section`
 
   
   `
   return (<Wrapper>
+    <Header />
     <Hero  {...data}/>
-    <Cities/>
     <Min/>
+    <Cities/>
    
 
     <Footer/>

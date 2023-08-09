@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../Styled/Footer";
 import "../App.css";
+import Hero from "../Styled/Hero";
+import contact from "../assets/contact.jpg";
 const Contact = () => {
+ 
   const Wrapper = styled.section`
   .ui{
     padding:9rem 0;
@@ -70,6 +73,7 @@ const Contact = () => {
   `;
   return (
     <Wrapper>
+      
       <div className="ui">
       <center>
         <h1>Feel free to contact us</h1>

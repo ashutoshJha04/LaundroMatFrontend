@@ -58,15 +58,21 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink className="list1" to={"/contact"}>
-              Contact
+            <NavLink className="list1" to={"/pricing"}>
+              Pricing
+            </NavLink>
+          </li>
+          <li className="">
+            <NavLink className="login " to={"/login"}>
+              Login
             </NavLink>
           </li>
           <li>
-            <NavLink className="list1" to={"/about"}>
-              About
+            <NavLink className=" register" to={"/register"}>
+              Register
             </NavLink>
           </li>
+          
         </ul>
       </div>
       </div>
@@ -74,7 +80,73 @@ const Header = () => {
   );
 };
 const MainHeader = styled.header`
+.register{
+  text-transform: uppercase;
+  text-decoration: none;
+  color:white;
+  padding: 1rem;
+  font-weight: 400;
+  letter-spacing:2px;
+  background-color:rgba(0,255,0,0.4);
+  width:100px;
+  text-align:center;
+  border-radius:12px;
+  border:2px solid white;
+  &:hover,
+  &:active {
+    background-color:	rgba(255,165,0,0.7) ;
+   border:2px solid black;
+   color:black;
+    // transition:color 0.3s linear
 
+    // font-weight:100;This is project by ashutosh jha .  i am 18 years old. i live in roshan nagar
+  }
+  &:link,
+  &:visited {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.8rem;
+    // color:orange;
+    transition: color 0.3s linear;
+  }
+  
+}
+.login{
+  text-transform: uppercase;
+  text-decoration: none;
+  color:white;
+  padding: 1rem;
+  font-weight: 400;
+  letter-spacing:2px;
+  background-color:rgba(98,84,243,0.4);
+  width:100px;
+  text-align:center;
+  border-radius:12px;
+  border:2px solid white;
+  &:hover,
+  &:active {
+    background-color:	rgba(255,165,0,0.6);
+    color: black;
+    border:2px solid black;
+    transition:color 0.3s linear;
+    transition:borer 0.3s linear;
+    transition:background 0.3s linear;
+
+    // font-weight:100;This is project by ashutosh jha .  i am 18 years old. i live in roshan nagar
+  }
+  &:link,
+  &:visited {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.8rem;
+    // color:orange;
+    transition: color 0.3s linear;
+  }
+  
+}
+.log{
+  color:black;
+}
 .active{
   border-bottom:2px solid orange;
 }
@@ -117,12 +189,14 @@ opacity:0.6;
     gap: 4.8rem;
     // padding: 0.5rem;
   }
+  
   .list1 {
     text-transform: uppercase;
     text-decoration: none;
     color:white;
-    padding: 0.5rem;
+    padding: 1rem;
     font-weight: 400;
+    letter-spacing:1.5px;
     &:hover,
     &:active {
       
