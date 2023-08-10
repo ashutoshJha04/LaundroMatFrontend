@@ -13,6 +13,7 @@ import GlobalStyle from './Styled/GlobalStyle';
 import Pricing from './components/Pricing'
 import Login from './components/Login'
 import Register from './components/Register'
+import { AuthProvider } from '../Context/AuthContext'
 
 function App() {
   const theme = {
@@ -41,6 +42,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <AuthProvider>
     <GlobalStyle/>
     <BrowserRouter>
     
@@ -62,6 +64,7 @@ function App() {
     
     
     </BrowserRouter>
+    </AuthProvider>
     </ThemeProvider>
   )
 }

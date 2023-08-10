@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
+import { useAuth } from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
-    
-    const handleSubmit = (e) => {
+    const { setAuth } = useAuth();
+    const { authData } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const navigatehandler = ()=>{
+        navigate('/register');
+    }
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const newErrors = {};
         
@@ -22,6 +34,32 @@ function Login() {
         if (Object.keys(newErrors).length === 0) {
             // Perform login logic here
             console.log('Logging in...');
+            const res = await fetch('http://localhost:8000/api/auths/login',{
+                method:'POST',
+                    headers:{
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,password
+                    })
+    
+                })
+                const data = await res.json();
+                if (res.ok) {
+                    setAuth(data);
+               console.log(data);
+                    navigate("/"); // Registration successful, you can perform further actions here
+                } else {
+                    // Check if the response contains an error message
+                    if (data && data.message) {
+                        // Display the error message using alert or any other method
+                        alert(data.message);
+                    } else {
+                        // Display a generic error message
+                        alert('An error occurred during login');
+                    }
+                }
+               
         } else {
             setErrors(newErrors);
         }
@@ -60,7 +98,8 @@ function Login() {
                 <div className='login-box'>
                 <button type="submit" className='login' style={{padding:8,marginBottom:5}}>Login</button>
                <center><span style={{color:'white'}}>or</span></center> 
-               <button type="submit" className='register' style={{padding:8,marginTop:5,marginBottom:20}}>Register</button>
+            
+               <button onClick={navigatehandler}  className='register' style={{padding:8,marginTop:5,marginBottom:20}}>Register</button>
 
                <center><a href="#">Forgot Password</a></center>
                 
@@ -72,6 +111,9 @@ function Login() {
         </Wrapper>
     );
 }
+
+
+
 const Wrapper = styled.section`
 width: 100vw;
 height: 100vh;

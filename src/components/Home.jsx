@@ -8,7 +8,8 @@ import Min from './Min'
 import styled from 'styled-components'
 import Cities from './Cities'
 import Header from '../Styled/Header'
-
+import { AuthContext } from '../../Context/AuthContext'
+import { useContext } from 'react'
 const Home = () => {
   
   const data = {
@@ -17,6 +18,9 @@ const Home = () => {
     bottomLine : " is the highest rated and most searched Laundry and Dry-Cleaning brand"
    
   }
+
+  const { authData } = useContext(AuthContext);
+  
   const Wrapper = styled.section`
 
   

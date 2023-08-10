@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import reactLogo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrFormClose } from "react-icons/gr";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Header = () => {
   const di = {
@@ -13,6 +14,7 @@ const Header = () => {
   }
   const [showNavbar, setShowNavbar] = useState(false);
   const [navbarOpacity, setNavbarOpacity] = useState(0);
+  const { authData } = useContext(AuthContext);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
@@ -62,7 +64,7 @@ const Header = () => {
               Pricing
             </NavLink>
           </li>
-          <li className="">
+         {authData==null?(<><li className="">
             <NavLink className="login " to={"/login"}>
               Login
             </NavLink>
@@ -71,7 +73,11 @@ const Header = () => {
             <NavLink className=" register" to={"/register"}>
               Register
             </NavLink>
-          </li>
+          </li></>):(<><li className="">
+          <NavLink className="login " to={"/login"}>
+            Profile
+          </NavLink>
+        </li></>)}
           
         </ul>
       </div>
