@@ -46,9 +46,15 @@ function Login() {
                 })
                 const data = await res.json();
                 if (res.ok) {
-                    setAuth(data);
-               console.log(data);
-                    navigate("/"); // Registration successful, you can perform further actions here
+                   
+                    if(data.isVerified){
+                        setAuth(data);
+                        navigate("/");
+                    }
+                    else{
+                        alert("Please complete verfication. Check your email inbox");
+                    }
+                    // Registration successful, you can perform further actions here
                 } else {
                     // Check if the response contains an error message
                     if (data && data.message) {
