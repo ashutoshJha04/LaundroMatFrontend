@@ -14,6 +14,7 @@ import Pricing from './components/Pricing'
 import Login from './components/Login'
 import Register from './components/Register'
 import { AuthProvider } from '../Context/AuthContext'
+import Order from './components/Order'
 
 function App() {
   const theme = {
@@ -58,6 +59,7 @@ function App() {
       <Route path="/pricing" element={<Pricing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/order" element={<Order />} />
       {/* <Route path="/contact" element={<Contact />} /> */}
       <Route path="*" element={<Home/>}  />
     </Routes>

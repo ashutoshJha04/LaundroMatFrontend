@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import Hero from '../Styled/Hero';
 import price from "../assets/pricing.jpg";
 import { Button } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
 function PricingComponents() {
+    const navigate = useNavigate();
     const data = {
         headline: "Lets know about our affordable charges",
         image: price,
         bottomLine: " Pricing varies based on these factors, ensuring fair payment for efficient, quality cleaning."
 
     }
+    
+    
     return (
         <Wrapper>
             <Hero {...data} />
@@ -21,8 +24,9 @@ function PricingComponents() {
                 We make Laundry affordable by charging you per kilo and not per piece. Our monthly package pricing keeps your budget in check
                 and saves you more money than doing it at home. Along with saving your money,<span className='blue'>we save your time!</span>
             </h3>
+           
             <div className='container mar grid grid-three-column'>
-                <div className="card" >
+                <div className="card" onClick={()=>{navigate('/order/')}} >
                     <div className="img">
 
                         <center>
@@ -143,3 +147,4 @@ const Wrapper = styled.section`
 `;
 
 export default PricingComponents
+

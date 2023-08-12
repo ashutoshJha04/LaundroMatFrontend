@@ -6,6 +6,7 @@ import { FaInstagram, FaFacebookSquare, FaTelegram} from "react-icons/fa";
 
 const Footer = () => {
   const Wrapper = styled.section`
+
     .top {
       display: flex;
       transform: translateY(45px);
