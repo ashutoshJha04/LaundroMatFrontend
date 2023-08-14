@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { AuthContext } from '../../Context/AuthContext';
+import axios from 'axios';
 
 function Placeorder() {
 
@@ -10,50 +11,52 @@ function Placeorder() {
     const [isChecked, setIsChecked] = useState(false);
     const [serviceAmount, setAmount] = useState(0);
     const [quantity, setQuantity] = useState(0);
-    const [deliveryamount,setDeliveryamount] = useState(0);
+    const [deliveryamount, setDeliveryamount] = useState(0);
     const homevisit = true;
-    const [homeVisit,setHomevisit] = useState(60);
-    const [totalAmount , setTotalprice] = useState(0);
+    const [homeVisit, setHomevisit] = useState(60);
+    const [totalAmount, setTotalprice] = useState(0);
     const { authData } = useContext(AuthContext);
+    const paid = true; 
     const email = authData.email;
     const username = authData.username;
     const userID = authData._id;
-    const [isdisable,setisdisable]= useState(false);
+    const [isdisable, setisdisable] = useState(false);
     const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  const [error, setError] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+    const [error, setError] = useState(null);
+    const [orderId, setOrderId] = useState('');
 
- useEffect(() => {
-    const getUserLocation = () => {
-        if ("geolocation" in navigator) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              setLatitude(position.coords.latitude);
-              setLongitude(position.coords.longitude);
-              console.log(position.coords.latitude);
-              console.log(position.coords.longitude);
-              setError(null);
-              
-            },
-            (error) => {
-              setError(error.message);
-              console.log(error.message);
+    useEffect(() => {
+        const getUserLocation = () => {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        setLatitude(position.coords.latitude);
+                        setLongitude(position.coords.longitude);
+                        console.log(position.coords.latitude);
+                        console.log(position.coords.longitude);
+                        setError(null);
+
+                    },
+                    (error) => {
+                        setError(error.message);
+                        console.log(error.message);
+                    }
+                );
+            } else {
+                setError("Geolocation is not supported in this browser.");
             }
-          );
-        } else {
-          setError("Geolocation is not supported in this browser.");
-        }
-      };
-      getUserLocation();
- }, [])
- 
+        };
+        getUserLocation();
+    }, [])
+
 
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
     const handlequantity = (e) => {
-        if(e.target.value >= 0){
+        if (e.target.value >= 0) {
             setQuantity(e.target.value);
         }
     };
@@ -70,103 +73,203 @@ function Placeorder() {
         setSelectedPayment(event.target.value);
     };
 
-    
-  useEffect(() => {
-    if (service === "Washing") {
-      setAmount(40);
-    } else if (service === "Steam iron") {
-      setAmount(30);
-    } else if (service === "Dry clean") {
-      setAmount(50);
-    } else if (service === "Premium") {
-      setAmount(70);
-    } else {
-      setAmount(0);
-    }
-  }, [service]);
 
-  useEffect(() => {
-    
-  setDeliveryamount(40);
-    
-  }, [setQuantity]);
-  
-  const updateTotalPrice = () => {
-    const calculatedTotalPrice = Math.round(serviceAmount*quantity)+(deliveryamount);
-    setTotalprice(calculatedTotalPrice);
-  };
+    useEffect(() => {
+        if (service === "Washing") {
+            setAmount(40);
+        } else if (service === "Steam iron") {
+            setAmount(30);
+        } else if (service === "Dry clean") {
+            setAmount(50);
+        } else if (service === "Premium") {
+            setAmount(70);
+        } else {
+            setAmount(0);
+        }
+    }, [service]);
 
-  useEffect(() => {
-    updateTotalPrice();
-    
-  }, [serviceAmount, quantity]);
+    useEffect(() => {
 
-    const handleSubmit = async(event) => {
+        setDeliveryamount(40);
+
+    }, [setQuantity]);
+
+    const updateTotalPrice = () => {
+        const calculatedTotalPrice = Math.round(serviceAmount * quantity) + (deliveryamount);
+        setTotalprice(calculatedTotalPrice);
+    };
+
+    useEffect(() => {
+        updateTotalPrice();
+
+    }, [serviceAmount, quantity]);
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        
-        if (!isChecked) {
-        //     console.log('City:', city);
-        // console.log('Package:', service);
-        // console.log('Payment:',payment);
-        // console.log('Service Amount:', serviceAmount);
-        // console.log('deliveryamount :', deliveryamount);
-        // console.log('quantity', quantity);
-        // console.log('totalAmount :', totalAmount);
-        // console.log('longitude :', longitude);
-        // console.log('latitude :', latitude);
-        // console.log(username);
-        // console.log(userID);
-        // console.log(email);
 
-        try {
-            const res = await fetch('http://localhost:8000/api/order/',{
-                method:'POST',
-                    headers:{
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email,username,userID,city,service,payment,serviceAmount,quantity,totalAmount,longitude,latitude
-                    })
-    
-                })
-                const data = await res.json();
-                if(res.ok){
-                    alert('order placed successfully')
+        if (!isChecked) {
+            //     console.log('City:', city);
+            // console.log('Package:', service);
+            // console.log('Payment:',payment);
+            // console.log('Service Amount:', serviceAmount);
+            // console.log('deliveryamount :', deliveryamount);
+            // console.log('quantity', quantity);
+            // console.log('totalAmount :', totalAmount);
+            // console.log('longitude :', longitude);
+            // console.log('latitude :', latitude);
+            // console.log(username);
+            // console.log(userID);
+            // console.log(email);
+
+            try {
+                if (payment === "Online") {
+                    try {
+
+
+                        const createOrder = async () => {
+                            try {
+                                const response = await axios.post('http://localhost:8000/create-order', {
+                                    amount: (totalAmount) * 100,
+                                    currency: 'INR'
+                                });
+
+                                setOrderId(response.data.id);
+                                return response.data.id;
+                            } catch (error) {
+                                alert('Error creating order: ' + error.message);
+                                throw error;
+                            }
+                        };
+
+                        const setupPaymentAndOpenGateway = async () => {
+                            try {
+                                const orderId = await createOrder();
+
+                                const options = {
+                                   
+                                    key: "",
+                                    one_click_checkout: true,
+                                    amount:totalAmount,
+                                    name: "Acme Corp",
+                                    order_id: orderId,
+                                    show_coupons: true, 
+                                    handler: function (response){
+
+                                        alert(response.razorpay_payment_id);
+                                        alert(response.razorpay_order_id);
+                                        alert(response.razorpay_signature);
+                                        postOrder(response.razorpay_payment_id,response.razorpay_order_id,response.razorpay_signature);
+                                    },
+                                    prefill: { 
+                                        name: username, 
+                                        email: email,
+                                        contact: "9000090000", 
+                                    },
+                                    note: {
+                                        address: "Razorpay Corporate Office"
+                                    }
+
+                                };
+
+                                console.log(options);
+
+                                const rzp1 = new Razorpay(options);
+                                rzp1.on('payment.failed', function (response){
+                                    alert(response.error.code);
+                                    alert(response.error.description);
+                                    alert(response.error.source);
+                                    alert(response.error.step);
+                                    alert(response.error.reason);
+                                    alert(response.error.metadata.order_id);
+                                    alert(response.error.metadata.payment_id);
+                            });
+                                rzp1.open();
+                            } catch (error) {
+                                // Handle any errors that occurred during order creation or payment setup
+                            }
+                        };
+
+                        // Call the setupPaymentAndOpenGateway function to initiate the process
+                        setupPaymentAndOpenGateway();
+
+                       async function postOrder(id,ord_id,sign) {
+                            const res = await fetch('http://localhost:8000/api/order/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                email, username, userID, city, service, payment, serviceAmount, quantity, totalAmount, longitude, latitude,id,ord_id,sign,paid
+                            })
+
+                        })
+                        const data = await res.json();
+                        if (res.ok) {
+                            alert('order placed successfully')
+                        } else {
+                            console.log(error.message);
+                        }
+
+                        }
+
+
+
+
+                    } catch (error) {
+                        alert(error.message);
+                    }
+
                 }
-                
-        } catch (error) {
-            alert(error.message);
+                else {
+                    const res = await fetch('http://localhost:8000/api/order/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email, username, userID, city, service, payment, serviceAmount, quantity, totalAmount, longitude, latitude
+                        })
+
+                    })
+                    const data = await res.json();
+                    if (res.ok) {
+                        alert('order placed successfully')
+                    }
+                }
+
+            } catch (error) {
+                alert(error.message);
+            }
         }
-        }
-        else{
+        else {
             // console.log('City:', city);
             // console.log('Package:', service);
             // console.log('Payment:',payment);
             // console.log('houseVisit: ', true);
             try {
-                const res = await fetch('http://localhost:8000/api/order/',{
-                    method:'POST',
-                        headers:{
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            email,username,userID,city,service,payment,homevisit
-                        })
-        
+                const res = await fetch('http://localhost:8000/api/order/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email, username, userID, city, service, payment, homevisit
                     })
-                    const data = await res.json();
-                    if(res.ok){
-                        alert('order placed successfully')
-                    }
-                    
+
+                })
+                const data = await res.json();
+                if (res.ok) {
+                    alert('order placed successfully')
+                }
+
             } catch (error) {
                 alert(error.message);
             }
         }
-        
+
     };
 
-   
+
 
     return (
         <Wrapper>
@@ -205,7 +308,7 @@ function Placeorder() {
                                 checked={isChecked}
                                 onChange={handleCheckboxChange}
                             />
-                            <h4 style={{paddingLeft:"5px"}}>not have any idea about stuff's Quantity</h4>
+                            <h4 style={{ paddingLeft: "5px" }}>not have any idea about stuff's Quantity</h4>
                         </label>
                     </div>
                     {!isChecked && <div>
@@ -222,7 +325,7 @@ function Placeorder() {
                                 checked={payment === 'Cash'}
                                 onChange={handlePaymentChange}
                             />
-                            <h4 style={{paddingLeft:"5px"}}>Cash</h4>
+                            <h4 style={{ paddingLeft: "5px" }}>Cash</h4>
                         </label>
                         <br />
                         <label className='radio'>
@@ -232,9 +335,9 @@ function Placeorder() {
                                 value="Online"
                                 checked={payment === 'Online'}
                                 onChange={handlePaymentChange}
-                                
+
                             />
-                                                        <h4 style={{paddingLeft:"5px"}}>Online</h4>
+                            <h4 style={{ paddingLeft: "5px" }}>Online</h4>
 
                         </label>
                     </div>
@@ -243,12 +346,12 @@ function Placeorder() {
                     <hr />
                     <br />
                     <br />
-                   {!isChecked ? <> <p>PRICE : <span>{`₹${Math.round(serviceAmount*quantity)}`}</span></p>
-                    <p>Delivery : ₹{deliveryamount}</p>
-                    <h2>TOTAL PRICE : <span className='blue'>{`₹${(Math.round(serviceAmount*quantity))==0?(0):(Math.round(serviceAmount*quantity))+(deliveryamount)}`}</span></h2>
-                    </> :<><h2>Home visit : <span>{homeVisit}</span></h2></> 
-                     }
-                    <button type="submit" disabled={(quantity==0&&totalAmount==0)?true:false} className='submit'>Order now</button>
+                    {!isChecked ? <> <p>PRICE : <span>{`₹${Math.round(serviceAmount * quantity)}`}</span></p>
+                        <p>Delivery : ₹{deliveryamount}</p>
+                        <h2>TOTAL PRICE : <span className='blue'>{`₹${(Math.round(serviceAmount * quantity)) == 0 ? (0) : (Math.round(serviceAmount * quantity)) + (deliveryamount)}`}</span></h2>
+                    </> : <><h2>Home visit : <span>{homeVisit}</span></h2></>
+                    }
+                    <button type="submit" disabled={(quantity == 0 && totalAmount == 0) ? true : false} className='submit'>Order now</button>
                 </div>
             </form>
         </Wrapper>
