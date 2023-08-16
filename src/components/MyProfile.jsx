@@ -31,6 +31,7 @@ const Wrapper = styled.section`
 .container{
   height:100vh;
   width:100vw;
+  
 }
 .userbox{
   // border:1px solid black;
