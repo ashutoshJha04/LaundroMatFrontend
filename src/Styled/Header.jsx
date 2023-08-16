@@ -31,6 +31,7 @@ const Header = () => {
   };
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -43,8 +44,7 @@ const Header = () => {
     <div className="div" style={{ backgroundColor: `rgba(10, 20, 53,0.6)`, transition: 'background-color 0.3s ease-in' }}>
       <div className="logo">
         <picture>
-          <img src={reactLogo} className="logo" alt="INDIAN" />
-          
+          <img src={reactLogo} className="logo" alt="STOFFCARE" />
         </picture>
       </div>
       <div className="navmenu">
@@ -70,11 +70,11 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink className=" register" to={"/register"}>
+            <NavLink className="register" to={"/register"}>
               Register
             </NavLink>
           </li></>):(<><li className="">
-          <NavLink className="login " to={"/login"}>
+          <NavLink className="login" to={"/profile"}>
             Profile
           </NavLink>
         </li></>)}

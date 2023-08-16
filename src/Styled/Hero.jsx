@@ -4,8 +4,12 @@ import styled from 'styled-components'
 import { Button } from './Button';
 import hero from '../assets/hero1.svg';
 import herone from '../assets/hero5.png';
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
 
 const Hero = ({image,headline,bottomLine}) => {
+    const { authData } = useContext(AuthContext);
+
     const Wrapper = styled.section`
    .hero-para{
     color:white;
@@ -103,7 +107,7 @@ const Hero = ({image,headline,bottomLine}) => {
                </p>
             
             
-                <Button className="btn hireme-btn"><Link to="/pricing" className='btt' style={{color:"Black",fontWeight:700,}}>Order now</Link></Button>
+                <Button className="btn hireme-btn"><Link to={authData===null?"/login":"/pricing"} className='btt' style={{color:"Black",fontWeight:700,}}>Order now</Link></Button>
                 
             </div>
             <div className="section-hero-image">

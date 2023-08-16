@@ -41,7 +41,7 @@ function PricingComponents() {
 
 
                 </div> 
-                <div className="card" >
+                <div className="card"  onClick={()=>{navigate('/order/')}} >
                     <div className="img">
 
                         <center>
@@ -55,7 +55,7 @@ function PricingComponents() {
 
 
                 </div> 
-                <div className="card" >
+                <div className="card"  onClick={()=>{navigate('/order/')}} >
                     <div className="img">
 
                         <center>
@@ -71,7 +71,7 @@ function PricingComponents() {
 
                 </div> 
                 </div>
-                <center><h3 style={{marginTop:"60px",letterSpacing:"2px"}}>Free pick up and drop are available on order above <span style={{color:"blue"}}>Rs. 300</span>!</h3></center>
+                <center><h3 style={{marginTop:"60px",letterSpacing:"2px"}}>Free pick up and drop will available soon on order above <span style={{color:"blue"}}>Rs. 300</span>!</h3></center>
         </Wrapper>
     )
 }

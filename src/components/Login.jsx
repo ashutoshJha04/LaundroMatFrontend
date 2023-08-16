@@ -48,7 +48,8 @@ function Login() {
                 if (res.ok) {
                    
                     if(data.isVerified){
-                        setAuth(data);
+                        const user = (localStorage.setItem('user',JSON.stringify(data)));
+                        setAuth(JSON.parse(localStorage.getItem('user')));
                         navigate("/");
                     }
                     else{

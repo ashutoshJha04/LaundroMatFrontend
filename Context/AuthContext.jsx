@@ -7,7 +7,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [authData, setAuthData] = useState(null);
+  const [authData, setAuthData] = useState(JSON.parse(localStorage.getItem('user')) || null);
 
   const setAuth = (data) => {
     setAuthData(data);

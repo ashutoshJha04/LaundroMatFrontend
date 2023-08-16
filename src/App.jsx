@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import Home from './components/Home'
@@ -13,10 +13,12 @@ import GlobalStyle from './Styled/GlobalStyle';
 import Pricing from './components/Pricing'
 import Login from './components/Login'
 import Register from './components/Register'
-import { AuthProvider } from '../Context/AuthContext'
+import { AuthContext, AuthProvider } from '../Context/AuthContext'
 import Order from './components/Order'
+import Profile from './components/Profile'
 
 function App() {
+  
   const theme = {
     colors:{
       heading:"rgb(24,24,29)",
@@ -60,6 +62,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/order" element={<Order />} />
+      <Route path="/profile" element={<Profile />} />
       {/* <Route path="/contact" element={<Contact />} /> */}
       <Route path="*" element={<Home/>}  />
     </Routes>

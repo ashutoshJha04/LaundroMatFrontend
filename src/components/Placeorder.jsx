@@ -10,7 +10,7 @@ function Placeorder() {
     const [payment, setSelectedPayment] = useState('');
     const [isChecked, setIsChecked] = useState(false);
     const [serviceAmount, setAmount] = useState(0);
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const [deliveryamount, setDeliveryamount] = useState(0);
     const homevisit = true;
     const [homeVisit, setHomevisit] = useState(60);
@@ -56,7 +56,7 @@ function Placeorder() {
         setIsChecked(!isChecked);
     };
     const handlequantity = (e) => {
-        if (e.target.value >= 0) {
+        if (e.target.value >= 1) {
             setQuantity(e.target.value);
         }
     };
@@ -106,7 +106,10 @@ function Placeorder() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        if(!payment){
+            alert("Please choose payment method");
+        }
+else{
         if (!isChecked) {
             //     console.log('City:', city);
             // console.log('Package:', service);
@@ -146,7 +149,6 @@ function Placeorder() {
                                 const orderId = await createOrder();
 
                                 const options = {
-                                   
                                     key: "",
                                     one_click_checkout: true,
                                     amount:totalAmount,
@@ -154,10 +156,6 @@ function Placeorder() {
                                     order_id: orderId,
                                     show_coupons: true, 
                                     handler: function (response){
-
-                                        alert(response.razorpay_payment_id);
-                                        alert(response.razorpay_order_id);
-                                        alert(response.razorpay_signature);
                                         postOrder(response.razorpay_payment_id,response.razorpay_order_id,response.razorpay_signature);
                                     },
                                     prefill: { 
@@ -266,7 +264,7 @@ function Placeorder() {
                 alert(error.message);
             }
         }
-
+    }
     };
 
 
