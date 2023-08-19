@@ -7,7 +7,7 @@ import herone from '../assets/hero5.png';
 import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 
-const Hero = ({image,headline,bottomLine}) => {
+const Hero = ({ image, headline, bottomLine }) => {
     const { authData } = useContext(AuthContext);
 
     const Wrapper = styled.section`
@@ -73,7 +73,7 @@ const Hero = ({image,headline,bottomLine}) => {
         
     }
     
-    @media screen and (max-width:1255px) {
+    @media screen and (max-width:1250px) {
         .grid{
             display:flex;
             flex-direction:column-reverse;
@@ -81,7 +81,20 @@ const Hero = ({image,headline,bottomLine}) => {
             align-item:center;
             text-align:center;
             margin:auto;
+            width:100%;
+           
         }
+        .hero-top{
+            color:white;
+        }
+        .hero-para{
+            margin:2rem auto;
+            color:white;
+        }
+        .btn{
+            margin:1rem auto;
+        }
+      
         .section-hero-image{
             width:100vw;
             img{
@@ -91,33 +104,44 @@ const Hero = ({image,headline,bottomLine}) => {
         }
        
     }
-       
-
+    @media screen and (max-width:470px) {
+        .section-hero-data{
+            padding:1.5rem;
+        }
+        .hero-head{
+            font-size:5rem;
+        }
+    }  
+    @media screen and (max-width:291px){
+        .hero-head{
+            font-size:3rem;
+        }
+    }
     `;
-  return (
-    <Wrapper>
-        <br />
-        <br />
-        <br />
-        <div className="  container grid grid-two-column ">
-            <div className="section-hero-data">
-                <p className='hero-top' style={{textShadow:"rgba(13,13,13,0.9) 0px 0px 25px"}}>{headline}</p>
-                <h1 className='hero-head'><span style={{color:"#0fa4e1",textShadow:"rgba(13,13,13,0.9) 0px 0px 25px"}}>St<span style={{color:"orange"}}>o</span>ff</span><span style={{color:"green" ,textShadow:"-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"}}>Care</span></h1>
-                <p  className='hero-para' style={{textShadow:"rgba(13,13,13,0.9) 0px 0px 25px"}}>{bottomLine}
-               </p>
+    return (
+        <Wrapper>
+            <br />
+           
             
-            
-                <Button className="btn hireme-btn"><Link to={authData===null?"/login":"/pricing"} className='btt' style={{color:"Black",fontWeight:700,}}>Order now</Link></Button>
-                
+            <div className="  container grid grid-two-column ">
+                <div className="section-hero-data">
+                    <p className='hero-top' style={{ textShadow: "rgba(13,13,13,0.9) 0px 0px 25px" }}>{headline}</p>
+                    <h1 className='hero-head'><span style={{ color: "#0fa4e1", textShadow: "rgba(13,13,13,0.9) 0px 0px 25px" }}>St<span style={{ color: "orange" }}>o</span>ff</span><span style={{ color: "green", textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;" }}>Care</span></h1>
+                    <p className='hero-para' style={{ textShadow: "rgba(13,13,13,0.9) 0px 0px 25px" }}>{bottomLine}
+                    </p>
+
+
+                    <Button className="btn hireme-btn"><Link to={authData === null ? "/login" : "/pricing"} className='btt' style={{ color: "Black", fontWeight: 700, }}>Order now</Link></Button>
+
+                </div>
+                <div className="section-hero-image">
+                    <picture>
+                        <img className='hero-image' src={hero} alt="Error" width={'702px'} />
+                    </picture>
+                </div>
             </div>
-            <div className="section-hero-image">
-            <picture>
-            <img className='hero-image' src={hero} alt="Error" width={'702px'}/>
-            </picture>
-            </div>
-        </div>
-    </Wrapper>
-  )
+        </Wrapper>
+    )
 }
 
 export default Hero

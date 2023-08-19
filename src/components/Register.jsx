@@ -196,6 +196,9 @@ align-items: center;
     color:white;
    
 }
+.title{
+    font-size:1.5rem;
+}
 .input{
     width:300px;
     height:30px;
@@ -224,6 +227,28 @@ align-items: center;
     flex-direction:column;
     justify-content:center;
 }
+@media only screen and (max-width: 516px){
+    .img{
+     width:150px;
+     height:100px;
+    }
+     .login-container{
+         border:1px solid black;
+         border-radius:12px;
+         width:90vw;
+        
+        background-color:#0a1435;
+     }
+     .input{
+         width:50vw;
+     }
+     .login{
+         width:40vw;
+     }
+     .register{
+         width:40vw;
+     }
+ }
 
 `
 

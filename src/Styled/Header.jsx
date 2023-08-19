@@ -5,82 +5,69 @@ import reactLogo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GrFormClose } from "react-icons/gr";
 import { AuthContext } from "../../Context/AuthContext";
+import ham from "../assets/menu.png"
 
 const Header = () => {
   const di = {
     position: "fixed",
-  width:"100vw",
-  zIndex:99,
+    width: "100vw",
+    zIndex: 99,
   }
   const [showNavbar, setShowNavbar] = useState(false);
   const [navbarOpacity, setNavbarOpacity] = useState(0);
   const { authData } = useContext(AuthContext);
+  const [displayMenu, setDisplayMenu] = useState(false);
 
-  const handleScroll = () => {
-    const scrollPosition = window.scrollY;
-    if (!scrollPosition > 0) {
-      setShowNavbar(true);
-      const newOpacity = Math.min(0, scrollPosition / 1000);
-       // Adjust the divisor to control the fade-in speed
-       
-      setNavbarOpacity(newOpacity);
-    } else {
-      setShowNavbar(false);
-      setNavbarOpacity(1);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+ 
 
   return (
 
     <MainHeader style={di}>
-    <div className="div" style={{ backgroundColor: `rgba(10, 20, 53,0.6)`, transition: 'background-color 0.3s ease-in' }}>
-      <div className="logo">
-        <picture>
-          <img src={reactLogo} className="logo" alt="STOFFCARE" />
-        </picture>
-      </div>
-      <div className="navmenu">
-        <ul className="list">
-          <li>
-            <NavLink className="list1" to={"/"}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="list1" to={"/serv"}>
-              Services
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="list1" to={"/pricing"}>
-              Pricing
-            </NavLink>
-          </li>
-         {authData==null?(<><li className="">
-            <NavLink className="login " to={"/login"}>
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="register" to={"/register"}>
-              Register
-            </NavLink>
-          </li></>):(<><li className="">
-          <NavLink className="login" to={"/profile"}>
-            Profile
-          </NavLink>
-        </li></>)}
-          
-        </ul>
-      </div>
+      <div className="div" style={{ backgroundColor: `rgba(10, 20, 53,0.6)`, transition: 'background-color 0.3s ease-in' }}>
+        <div className="logo">
+          <picture>
+            <img src={reactLogo} className="logo" alt="STOFFCARE" />
+          </picture>
+        </div>
+        <div className="navmenu">
+          {(window.innerWidth<970?displayMenu:true) && <ul className="list">
+            <li className="logbox">
+              <NavLink className="list1" to={"/"}>
+                Home
+              </NavLink>
+            </li>
+            <li className="logbox">
+              <NavLink className="list1"  to={"/serv"}>
+                Services
+              </NavLink>
+            </li>
+            <li className="logbox">
+              <NavLink className="list1" to={"/pricing"}>
+                Pricing
+              </NavLink>
+            </li>
+            {authData == null ? (<><li className="logbox">
+              <NavLink className="login "  to={"/login"}>
+                Login
+              </NavLink>
+            </li>
+              <li className="logbox">
+                <NavLink className="register" to={"/register"}>
+                  Register
+                </NavLink>
+              </li></>) : (<><li className="logbox" >
+                <NavLink className="login" to={"/profile"}>
+                  Profile
+                </NavLink>
+              </li></>)}
+
+          </ul>}
+          <ul>
+            <li className="menu" onClick={()=>setDisplayMenu(!displayMenu)}>
+              <img src={ham} alt="" />
+            </li>
+          </ul>
+        </div>
       </div>
     </MainHeader>
   );
@@ -168,7 +155,7 @@ const MainHeader = styled.header`
   height:100%;
   top:0;
   right:0;
-  // background-color: ${({ theme }) => theme.colors.bg};
+  background-color: ${({ theme }) => theme.colors.bg};
 z-index:-1;
 opacity:0.6;
 }
@@ -182,13 +169,15 @@ opacity:0.6;
   justify-content: space-between;
   align-items: center;
   
-
+  
   
   li {
     list-style:none;
   }
    
-
+  .menu{
+    display:none;
+  }
 
   .list {
     display: flex;
@@ -220,21 +209,69 @@ opacity:0.6;
       transition: color 0.3s linear;
     }
   }}
-  @media only screen and (max-width: 790px){
+  @media only screen and (max-width: 970px){
     .div{
-      flex-direction:column;
+      padding: 0 2rem;
+      
       .logo{
-        padding-top:13px;
+        // padding-top:13px;
+        width:120px;
+        height:90px;
       }
+      
       .list{
         padding-bottom:13px;
-        gap:1.3rem;
+       
+        flex-direction:column;
+        width:100vw;
+        height:100vh;
+        background-color:rgba(0,0,0,0.96);
+        position:fixed;
+        left:0;
+        top:0;
+       overflow:hidden;
+        opacity:1;
+        
         
       }
-      .list1{
-        font-size:1rem;
+      .list:first-child{
+        padding-top:10rem;
       }
+      .list1{
+        font-size:10%;
+        
+        
+        text-align:center;
+        
+      }
+      .menu{
+        display:block;
+        img{
+          width:50px;
+          height:50px;
+          filter:invert(1);
+        }
+      }
+      
     }
+  }
+  .logbox{
+    width:100%;
+    
+    display:flex;
+    justify-content:center;
+    
+  }
+  .div::after{
+    content: "";
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    right:0;
+    background-color: ${({ theme }) => theme.colors.bg};
+  z-index:-1;
+  opacity:0.1;
   }
 
 `;

@@ -149,7 +149,6 @@ else{
                                 const orderId = await createOrder();
 
                                 const options = {
-                                    
                                     key: "",
                                     one_click_checkout: true,
                                     amount:totalAmount,

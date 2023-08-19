@@ -26,9 +26,9 @@ function Cities() {
   };
   return (
     <Wrapper>
-      <center><h1>CITIES WE DELIVER TO</h1></center>
-      <div className='cities-heading'>
-        <img src={towel2} alt="error" width={"200px"} height={"200px"} />
+      <center><h1 className='heading'>CITIES WE DELIVER TO</h1></center>
+      <div className='cities-heading container'>
+        <img src={towel2} alt="error" className='img' />
         <div className='city-search'>
           <div className='searchbar'>
             <input
@@ -47,7 +47,7 @@ function Cities() {
             ))}
           </ul>
         </div>
-        <img src={towel1} alt="error" width={"200px"} height={"200px"} />
+        <img src={towel1} alt="error" className='img' />
       </div>
 
     </Wrapper>
@@ -122,6 +122,11 @@ background-size: cover;
     outline:none;
     
 }
+.img{
+  width:300px;
+  height:300px;
+}
+
 .city-list{
     font-size:2.5rem;
     font-weight:light;
@@ -133,6 +138,56 @@ background-size: cover;
     padding:0.5rem;
 }
 
-
+ @media screen and (max-width:955px){
+    .cities-heading{
+      display:flex;
+      flex-direction:column;
+    }
+    .city-search{
+      width:70vw;
+    }
+    .city-input{
+      width:70vw;
+      height:40px;
+      font-size:3rem;
+      border-radius:12px;
+      padding:0.5rem;
+      
+  }
+  .city-list-box{
+    height:150px;
+    
+    margin-top:10px;
+   
+    border-radius:12px;
+    border:2px solid black; 
+    width:70vw;
+    
+    overflow-x: hidden;
+    overflow-y: auto;
+    
+}
+  .city-list{
+    font-size:2.5rem;
+    font-weight:light;
+    letter-spacing:2px;
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
+    border-bottom:1px solid black;
+    width:70vw;
+    padding:0.5rem;
+}
+.heading{
+  font-size:2rem;
+}
+.city-list{
+  font-size:2rem;
+}
+    .img{
+  width:250px;
+  height:250px;
+  margin-top:3rem;
+}
+ }
 `;
 export default Cities
