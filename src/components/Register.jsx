@@ -33,7 +33,7 @@ function Register() {
         if (Object.keys(newErrors).length === 0) {
             // Perform login logic here
             console.log('Registering...');
-            const res = await fetch('http://localhost:8000/api/auths/register', {
+            const res = await fetch('http://192.168.1.23:8000/api/auths/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

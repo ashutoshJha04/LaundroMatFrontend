@@ -144,7 +144,7 @@ const MainHeader = styled.header`
   border-bottom:2px solid orange;
 }
 .logo{
-  height:100px;
+  height:150px;
   width:200px;
   padding-bottom:10px;
 }

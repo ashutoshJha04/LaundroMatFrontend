@@ -64,6 +64,14 @@ const Footer = () => {
       font-size: 26px;
       margin-top: 1rem;
     }
+    .flex{
+      display:flex;
+      gap:10px;
+     }
+    
+     .flex:first-child{
+     display:none;
+     }
     .last{
         font-family:belgrado;
         letter-spacing:1px;
@@ -99,7 +107,10 @@ const Footer = () => {
                 padding-right:1rem;
             }
         } 
-       
+       .flex{
+        display:flex;
+        flex-direction:column;
+       }
         
     
     }
@@ -111,7 +122,7 @@ const Footer = () => {
           <div className="one">
             Ready to get started ?<br /> Talk to us today 
           </div>
-          <NavLink to="/contact">
+          <NavLink to="/order">
             <Button className="last">Lets talk</Button>
           </NavLink>
         </div>
@@ -121,7 +132,7 @@ const Footer = () => {
         <div className="center">
           <div className="grid hei grid-four-column">
             <div className="div iv">
-              SoftCare <br />
+              Laundromat <br />
               <br />
               Contact us for any query
             </div>
@@ -173,8 +184,8 @@ const Footer = () => {
         <br />
         
           <center><div className="container grid grid-two-column">
-            <p style={{color:'white',marginTop:'1rem'}}>@{new Date().getFullYear()} SoftCare .All rights reserved</p>
-            <div style={{marginTop:'0.2rem'}}>
+            <p style={{color:'white',marginTop:'1rem'}}>@{new Date().getFullYear()} Laundromat . All rights reserved</p>
+            <div style={{marginTop:'0.2rem'}} className="flex">
               <p style={{color:'white'}}>privacy policy</p>
               <p style={{color:'white'}}>terms and conditons</p>
             </div>

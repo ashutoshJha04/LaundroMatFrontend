@@ -149,10 +149,10 @@ else{
                                 const orderId = await createOrder();
 
                                 const options = {
-                                    key: "",
+                                    key: "rzp_test_Cr90B971ZVQjBr",
                                     one_click_checkout: true,
                                     amount:totalAmount,
-                                    name: "Acme Corp",
+                                    name: "Laundromat",
                                     order_id: orderId,
                                     show_coupons: true, 
                                     handler: function (response){
@@ -164,7 +164,7 @@ else{
                                         contact: "9000090000", 
                                     },
                                     note: {
-                                        address: "Razorpay Corporate Office"
+                                        address: "EveryBody's Laundromat"
                                     }
 
                                 };
@@ -245,20 +245,115 @@ else{
             // console.log('Payment:',payment);
             // console.log('houseVisit: ', true);
             try {
-                const res = await fetch('http://localhost:8000/api/order/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email, username, userID, city, service, payment, homevisit
-                    })
+                if (payment === "Online") {
+                    try {
 
-                })
-                const data = await res.json();
-                if (res.ok) {
-                    alert('order placed successfully')
+
+                        const createOrder = async () => {
+                            try {
+                                const response = await axios.post('http://localhost:8000/create-order', {
+                                    amount: (60) * 100,
+                                    currency: 'INR'
+                                });
+
+                                setOrderId(response.data.id);
+                                return response.data.id;
+                            } catch (error) {
+                                alert('Error creating order: ' + error.message);
+                                throw error;
+                            }
+                        };
+
+                        const setupPaymentAndOpenGateway = async () => {
+                            try {
+                                const orderId = await createOrder();
+
+                                const options = {
+                                    key: "rzp_test_Cr90B971ZVQjBr",
+                                    one_click_checkout: true,
+                                    amount:60,
+                                    name: "Laundromat",
+                                    order_id: orderId,
+                                    show_coupons: true, 
+                                    handler: function (response){
+                                        postOrder(response.razorpay_payment_id,response.razorpay_order_id,response.razorpay_signature);
+                                    },
+                                    prefill: { 
+                                        name: username, 
+                                        email: email,
+                                        contact: "9000090000", 
+                                    },
+                                    note: {
+                                        address: "EveryBody's Laundromat"
+                                    }
+
+                                };
+
+                                console.log(options);
+
+                                const rzp1 = new Razorpay(options);
+                                rzp1.on('payment.failed', function (response){
+                                    alert(response.error.code);
+                                    alert(response.error.description);
+                                    alert(response.error.source);
+                                    alert(response.error.step);
+                                    alert(response.error.reason);
+                                    alert(response.error.metadata.order_id);
+                                    alert(response.error.metadata.payment_id);
+                            });
+                                rzp1.open();
+                            } catch (error) {
+                                // Handle any errors that occurred during order creation or payment setup
+                            }
+                        };
+
+                        // Call the setupPaymentAndOpenGateway function to initiate the process
+                        setupPaymentAndOpenGateway();
+
+                       async function postOrder(id,ord_id,sign) {
+                            const res = await fetch('http://localhost:8000/api/order/', {
+                            method: 'POST',
+                             headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                homevisit, email, username, userID, city, service, payment,longitude, latitude,id,ord_id,sign,paid
+                            })
+
+                        })
+                        const data = await res.json();
+                        if (res.ok) {
+                            alert('order placed successfully')
+                        } else {
+                            console.log(error.message);
+                        }
+
+                        }
+
+
+
+
+                    } catch (error) {
+                        alert(error.message);
+                    }
+
+                }else{
+                    const res = await fetch('http://localhost:8000/api/order/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email, username, userID, city, service, payment, homevisit
+                        })
+    
+                    })
+                    const data = await res.json();
+                    if (res.ok) {
+                        alert('order placed successfully')
+                    }
                 }
+               
 
             } catch (error) {
                 alert(error.message);
@@ -429,6 +524,18 @@ color:blue;
   
    height:20px;
    font-size:1rem;
+}
+@media only screen and (max-width: 592px){
+    .box{
+        width:70vw;
+    }
+    .head{
+        font-size:2rem;
+    }
+
+  .submit{
+    width:40vw;
+  }
 }
 `
 export default Placeorder

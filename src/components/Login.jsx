@@ -34,7 +34,7 @@ function Login() {
         if (Object.keys(newErrors).length === 0) {
             // Perform login logic here
             console.log('Logging in...');
-            const res = await fetch('http://localhost:8000/api/auths/login',{
+            const res = await fetch('http://192.168.1.23:8000/api/auths/login',{
                 method:'POST',
                     headers:{
                         'Content-Type': 'application/json',

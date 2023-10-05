@@ -42,7 +42,7 @@ function MyProfile() {
   console.log(order);
   const cancelOrder =async(id)=>{
     try {
-      const response = await axios.get(`http://localhost:8000/api/order/cancelOrder/${id}`);
+      const response = await axios.get(`http://192.168.1.23:8000/api/order/cancelOrder/${id}`);
       const data = response.data ;
       alert(data.message);
       setRefresh(!refresh);

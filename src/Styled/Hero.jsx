@@ -126,7 +126,7 @@ const Hero = ({ image, headline, bottomLine }) => {
             <div className="  container grid grid-two-column ">
                 <div className="section-hero-data">
                     <p className='hero-top' style={{ textShadow: "rgba(13,13,13,0.9) 0px 0px 25px" }}>{headline}</p>
-                    <h1 className='hero-head'><span style={{ color: "#0fa4e1", textShadow: "rgba(13,13,13,0.9) 0px 0px 25px" }}>St<span style={{ color: "orange" }}>o</span>ff</span><span style={{ color: "green", textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;" }}>Care</span></h1>
+                    <h1 className='hero-head'><span style={{ color: "#0fa4e1", textShadow: "rgba(13,13,13,0.9) 0px 0px 25px" }}>Laun<span style={{ color: "orange" }}>dro</span></span><span style={{ color: "green", textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;" }}>mat</span></h1>
                     <p className='hero-para' style={{ textShadow: "rgba(13,13,13,0.9) 0px 0px 25px" }}>{bottomLine}
                     </p>
 
