@@ -10,11 +10,12 @@ import Cities from './Cities'
 import Header from '../Styled/Header'
 import { AuthContext } from '../../Context/AuthContext'
 import { useContext } from 'react'
+import homeimg from "../../public/home.jpg"
 const Home = () => {
   
   const data = {
     headline:"Upgrade your laundry experince",
-    image : "https://malgut.pl/wp-content/themes/malgut/img/topmal_01.png",
+    image : homeimg,
     bottomLine : " is the highest rated and most searched Laundry and Dry-Cleaning brand"
    
   }

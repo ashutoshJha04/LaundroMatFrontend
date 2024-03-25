@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import reactLogo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -8,6 +8,8 @@ import { AuthContext } from "../../Context/AuthContext";
 import ham from "../assets/menu.png"
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const di = {
     position: "fixed",
     width: "100vw",
@@ -15,15 +17,21 @@ const Header = () => {
   }
   const [showNavbar, setShowNavbar] = useState(false);
   const [navbarOpacity, setNavbarOpacity] = useState(0);
-  const { authData } = useContext(AuthContext);
+  const { authData , setAuth} = useContext(AuthContext);
   const [displayMenu, setDisplayMenu] = useState(false);
 
- 
+  const logouthandler = () => {
+    localStorage.removeItem("user");
+    setAuth(null);
+    navigate("/login");
+  }
 
   return (
-
+    <>
+    {!authData?.isAdmin ?
     <MainHeader style={di}>
       <div className="div" style={{ backgroundColor: `rgba(10, 20, 53,0.6)`, transition: 'background-color 0.3s ease-in' }}>
+
         <div className="logo">
           <picture>
             <img src={reactLogo} className="logo" alt="STOFFCARE" />
@@ -69,10 +77,38 @@ const Header = () => {
           </ul>
         </div>
       </div>
+    </MainHeader> : (<>
+      <MainHeader style={di}>
+      <div className="div" style={{ backgroundColor: `rgba(10, 20, 53,0.6)`, transition: 'background-color 0.3s ease-in' }}>
+
+        <div className="logo">
+          <picture>
+            <img src={reactLogo} className="logo" alt="STOFFCARE" />
+          </picture>
+        </div>
+        <div className="navmenu">
+           
+        <div>
+                <input type='submit' className="login" onClick={logouthandler} value={"Log-out"} />
+        </div>
+             
+          
+        </div>
+      </div>
     </MainHeader>
+    </>)}
+    </>
   );
 };
 const MainHeader = styled.header`
+.button{
+  border:2px solid black;
+  padding:2rem 3rem;
+  font-size:2rem;
+  border-radius:12px;
+  background-color:green;
+  color:white;
+}
 .register{
   text-transform: uppercase;
   text-decoration: none;

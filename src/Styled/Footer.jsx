@@ -69,9 +69,6 @@ const Footer = () => {
       gap:10px;
      }
     
-     .flex:first-child{
-     display:none;
-     }
     .last{
         font-family:belgrado;
         letter-spacing:1px;

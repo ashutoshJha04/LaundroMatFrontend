@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import Home from './components/Home'
@@ -16,9 +16,10 @@ import Register from './components/Register'
 import { AuthContext, AuthProvider } from '../Context/AuthContext'
 import Order from './components/Order'
 import Profile from './components/Profile'
+import Admin from './components/Admin'
 
 function App() {
-  
+ 
   const theme = {
     colors:{
       heading:"rgb(24,24,29)",
@@ -43,33 +44,41 @@ function App() {
     },
   };
 
+ 
+ 
+  const { authData } = useContext(AuthContext);
+console.log(authData);
+  
+
   return (
     <ThemeProvider theme={theme}>
-      <AuthProvider>
+      {/* <AuthProvider> */}
     <GlobalStyle/>
-    <BrowserRouter>
-    
-    
-    
-    
-
-    
+    {(!authData || !authData?.isAdmin) && (
+      <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home/>} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
       <Route path="/about" element={<About />} />
       <Route path="/serv" element={<Services />} />
       <Route path="/pricing" element={<Pricing />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
       <Route path="/order" element={<Order />} />
       <Route path="/profile" element={<Profile />} />
       {/* <Route path="/contact" element={<Contact />} /> */}
       <Route path="*" element={<Home/>}  />
     </Routes>
-    
-    
-    </BrowserRouter>
-    </AuthProvider>
+      </BrowserRouter>
+    )}
+    {authData?.isAdmin && (
+        <BrowserRouter>
+       <Admin/>
+        </BrowserRouter>
+      )}
+   
+   
+    {/* </AuthProvider> */}
     </ThemeProvider>
   )
 }
